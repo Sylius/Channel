@@ -11,17 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Channel\Factory;
+namespace Sylius\Component\Channel\Checker;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @template T of ChannelInterface
- *
- * @extends FactoryInterface<T>
- */
-interface ChannelFactoryInterface extends FactoryInterface
+interface ChannelDeletionCheckerInterface
 {
-    public function createNamed(string $name): ChannelInterface;
+    public function isDeletable(ChannelInterface $channel): bool;
 }

@@ -11,28 +11,28 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Channel\Context;
+namespace Sylius\Component\Channel\Checker;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
-final class SingleChannelContext implements ChannelContextInterface
+final class ChannelDeletionChecker implements ChannelDeletionCheckerInterface
 {
+    /**
+     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     */
     public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
     }
 
-    public function getChannel(): ChannelInterface
+    public function isDeletable(ChannelInterface $channel): bool
     {
-        $channelsCount = $this->channelRepository->countAll();
-
-        if (1 !== $channelsCount) {
-            throw new ChannelNotFoundException();
+        if (!$channel->isEnabled()) {
+            return true;
         }
 
-        /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneBy([]);
+        $enabledChannels = $this->channelRepository->findEnabled();
 
-        return $channel;
+        return count($enabledChannels) > 1;
     }
 }
