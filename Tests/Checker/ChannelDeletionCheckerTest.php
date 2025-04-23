@@ -20,6 +20,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 final class ChannelDeletionCheckerTest extends TestCase
 {
+    /** @var ChannelRepositoryInterface<ChannelInterface> */
     private ChannelRepositoryInterface $channelRepository;
 
     private ChannelDeletionChecker $checker;
