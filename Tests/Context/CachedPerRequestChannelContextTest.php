@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\CachedPerRequestChannelContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -23,8 +24,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CachedPerRequestChannelContextTest extends TestCase
 {
+    /** @var ChannelContextInterface&MockObject */
     private ChannelContextInterface $decoratedChannelContext;
 
+    /** @var RequestStack&MockObject */
     private RequestStack $requestStack;
 
     private CachedPerRequestChannelContext $context;
@@ -148,7 +151,7 @@ final class CachedPerRequestChannelContextTest extends TestCase
             {
             }
 
-            public function __invoke()
+            public function __invoke(): ChannelInterface
             {
                 if ($this->counter === 0) {
                     ++$this->counter;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\RequestBased\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -24,8 +25,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ChannelContextTest extends TestCase
 {
+    /** @var RequestResolverInterface&MockObject */
     private RequestResolverInterface $requestResolver;
 
+    /** @var RequestStack&MockObject */
     private RequestStack $requestStack;
 
     private ChannelContext $context;
@@ -40,7 +43,7 @@ final class ChannelContextTest extends TestCase
         );
     }
 
-    public function testImplementsChannelContextInterface(): void
+    public function testShouldImplementsChannelContextInterface(): void
     {
         self::assertInstanceOf(ChannelContextInterface::class, $this->context);
     }
@@ -62,7 +65,7 @@ final class ChannelContextTest extends TestCase
         self::assertSame($channel, $this->context->getChannel());
     }
 
-    public function testThrowsChannelNotFoundExceptionIfRequestResolverReturnsNull(): void
+    public function testShouldThrowsChannelNotFoundExceptionIfRequestResolverReturnsNull(): void
     {
         $masterRequest = $this->createMock(Request::class);
 
@@ -80,7 +83,7 @@ final class ChannelContextTest extends TestCase
         $this->context->getChannel();
     }
 
-    public function testThrowsChannelNotFoundExceptionIfThereIsNoMasterRequest(): void
+    public function testShouldThrowsChannelNotFoundExceptionIfThereIsNoMasterRequest(): void
     {
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')

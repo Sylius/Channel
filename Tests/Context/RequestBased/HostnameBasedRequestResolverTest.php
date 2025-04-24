@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\RequestBased\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
@@ -22,17 +23,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class HostnameBasedRequestResolverTest extends TestCase
 {
+    /** @var MockObject&ChannelRepositoryInterface<ChannelInterface> */
     private ChannelRepositoryInterface $channelRepository;
 
     private HostnameBasedRequestResolver $resolver;
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->channelRepository = $this->createMock(ChannelRepositoryInterface::class);
         $this->resolver = new HostnameBasedRequestResolver($this->channelRepository);
     }
 
-    public function testImplementsRequestResolverInterface(): void
+    public function testShouldImplementsRequestResolverInterface(): void
     {
         self::assertInstanceOf(RequestResolverInterface::class, $this->resolver);
     }
@@ -54,7 +57,7 @@ final class HostnameBasedRequestResolverTest extends TestCase
         self::assertSame($channel, $this->resolver->findChannel($request));
     }
 
-    public function testReturnsNullIfChannelWasNotFound(): void
+    public function testShouldReturnsNullIfChannelWasNotFound(): void
     {
         $request = $this->createMock(Request::class);
 

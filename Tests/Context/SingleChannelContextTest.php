@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -22,7 +23,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 final class SingleChannelContextTest extends TestCase
 {
-    /** @var ChannelRepositoryInterface<ChannelInterface> */
+    /** @var MockObject&ChannelRepositoryInterface<ChannelInterface> */
     private ChannelRepositoryInterface $channelRepository;
 
     private SingleChannelContext $context;
@@ -30,9 +31,7 @@ final class SingleChannelContextTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        /** @var ChannelRepositoryInterface<ChannelInterface> $channelRepository */
-        $channelRepository = $this->createMock(ChannelRepositoryInterface::class);
-        $this->channelRepository = $channelRepository;
+        $this->channelRepository = $this->createMock(ChannelRepositoryInterface::class);
         $this->context = new SingleChannelContext($this->channelRepository);
     }
 

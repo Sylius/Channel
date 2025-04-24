@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Checker\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Checker\ChannelDeletionChecker;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -20,7 +21,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 final class ChannelDeletionCheckerTest extends TestCase
 {
-    /** @var ChannelRepositoryInterface<ChannelInterface> */
+    /** @var MockObject&ChannelRepositoryInterface<ChannelInterface> */
     private ChannelRepositoryInterface $channelRepository;
 
     private ChannelDeletionChecker $checker;
