@@ -135,11 +135,13 @@ final class CachedPerRequestChannelContextTest extends TestCase
 
     public function testDoesNotCacheChannelNotFoundExceptionsForNullMasterRequests(): void
     {
+        $channel = $this->createMock(ChannelInterface::class);
+
         $this->requestStack->expects(self::exactly(2))
             ->method('getMainRequest')
             ->willReturnOnConsecutiveCalls(null, null);
 
-        $callable = new class($this->createMock(ChannelInterface::class)) {
+        $callable = new class($channel) {
             private int $counter = 0;
 
             public function __construct(private ChannelInterface $channel)
@@ -162,14 +164,15 @@ final class CachedPerRequestChannelContextTest extends TestCase
             ->method('getChannel')
             ->willReturnCallback($callable);
 
-        self::expectException(ChannelNotFoundException::class);
-
+        // First call should throw
         try {
             $this->context->getChannel();
+            self::fail('Expected ChannelNotFoundException was not thrown');
         } catch (ChannelNotFoundException) {
-            // first call
+            // ok
         }
-        // second call should return channel
-        self::assertInstanceOf(ChannelInterface::class, $this->context->getChannel());
+
+        // Second call should succeed
+        self::assertSame($channel, $this->context->getChannel());
     }
 }
