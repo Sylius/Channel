@@ -42,7 +42,7 @@ final class CachedPerRequestChannelContextTest extends TestCase
         );
     }
 
-    public function testImplementsChannelContextInterface(): void
+    public function testShouldImplementChannelContextInterface(): void
     {
         self::assertInstanceOf(ChannelContextInterface::class, $this->context);
     }
@@ -130,7 +130,6 @@ final class CachedPerRequestChannelContextTest extends TestCase
         try {
             $this->context->getChannel();
         } catch (ChannelNotFoundException) {
-            // try again to see caching
         }
         self::expectException(ChannelNotFoundException::class);
         $this->context->getChannel();
@@ -167,15 +166,12 @@ final class CachedPerRequestChannelContextTest extends TestCase
             ->method('getChannel')
             ->willReturnCallback($callable);
 
-        // First call should throw
         try {
             $this->context->getChannel();
             self::fail('Expected ChannelNotFoundException was not thrown');
         } catch (ChannelNotFoundException) {
-            // ok
         }
 
-        // Second call should succeed
         self::assertSame($channel, $this->context->getChannel());
     }
 }

@@ -29,7 +29,7 @@ final class CompositeChannelContextTest extends TestCase
         $this->context = new CompositeChannelContext();
     }
 
-    public function testShouldImplementsChannelContextInterface(): void
+    public function testShouldImplementChannelContextInterface(): void
     {
         self::assertInstanceOf(ChannelContextInterface::class, $this->context);
     }

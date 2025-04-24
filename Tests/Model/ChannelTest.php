@@ -27,7 +27,7 @@ class ChannelTest extends TestCase
         $this->channel = new Channel();
     }
 
-    public function testShouldImplementsChannelInterface(): void
+    public function testShouldImplementChannelInterface(): void
     {
         self::assertInstanceOf(ChannelInterface::class, $this->channel);
     }
@@ -81,7 +81,7 @@ class ChannelTest extends TestCase
         self::assertFalse($this->channel->isEnabled());
     }
 
-    public function testShouldInitializesCreationDateByDefault(): void
+    public function testShouldInitializeCreationDateByDefault(): void
     {
         self::assertInstanceOf(\DateTimeInterface::class, $this->channel->getCreatedAt());
     }

@@ -21,7 +21,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 
 class ChannelFactoryTest extends TestCase
 {
-    public function testShouldImplementsChannelFactoryInterface(): void
+    public function testShouldImplementChannelFactoryInterface(): void
     {
         $defaultFactory = $this->createMock(FactoryInterface::class);
         $factory = new ChannelFactory($defaultFactory);
@@ -29,7 +29,7 @@ class ChannelFactoryTest extends TestCase
         self::assertInstanceOf(ChannelFactoryInterface::class, $factory);
     }
 
-    public function testShouoldCreatesChannelWithName(): void
+    public function testShouldCreateChannelWithName(): void
     {
         $defaultFactory = $this->createMock(FactoryInterface::class);
         $channel = $this->createMock(ChannelInterface::class);
@@ -47,7 +47,7 @@ class ChannelFactoryTest extends TestCase
         self::assertSame($channel, $factory->createNamed('United States Webstore'));
     }
 
-    public function testShouldCreatesEmptyChannel(): void
+    public function testShouldCreateEmptyChannel(): void
     {
         $defaultFactory = $this->createMock(FactoryInterface::class);
         $channel = $this->createMock(ChannelInterface::class);

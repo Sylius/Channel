@@ -35,7 +35,7 @@ final class SingleChannelContextTest extends TestCase
         $this->context = new SingleChannelContext($this->channelRepository);
     }
 
-    public function testShouldImplementsChannelContextInterface(): void
+    public function testShouldImplementChannelContextInterface(): void
     {
         self::assertInstanceOf(ChannelContextInterface::class, $this->context);
     }

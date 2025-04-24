@@ -35,7 +35,7 @@ final class HostnameBasedRequestResolverTest extends TestCase
         $this->resolver = new HostnameBasedRequestResolver($this->channelRepository);
     }
 
-    public function testShouldImplementsRequestResolverInterface(): void
+    public function testShouldImplementRequestResolverInterface(): void
     {
         self::assertInstanceOf(RequestResolverInterface::class, $this->resolver);
     }

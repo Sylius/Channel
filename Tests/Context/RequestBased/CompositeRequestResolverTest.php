@@ -28,19 +28,19 @@ final class CompositeRequestResolverTest extends TestCase
         $this->resolver = new CompositeRequestResolver();
     }
 
-    public function testImplementsRequestResolverInterface(): void
+    public function testShouldImplementRequestResolverInterface(): void
     {
         self::assertInstanceOf(RequestResolverInterface::class, $this->resolver);
     }
 
-    public function testReturnsNullIfThereAreNoNestedRequestResolversAdded(): void
+    public function testShouldReturnsNullIfThereAreNoNestedRequestResolversAdded(): void
     {
         $request = $this->createMock(Request::class);
 
         self::assertNull($this->resolver->findChannel($request));
     }
 
-    public function testReturnsNullIfNoneOfNestedRequestResolversReturnedChannel(): void
+    public function testShouldReturnsNullIfNoneOfNestedRequestResolversReturnedChannel(): void
     {
         $request = $this->createMock(Request::class);
         $nestedResolver = $this->createMock(RequestResolverInterface::class);
@@ -55,7 +55,7 @@ final class CompositeRequestResolverTest extends TestCase
         self::assertNull($this->resolver->findChannel($request));
     }
 
-    public function testReturnsFirstResultReturnedByNestedRequestResolvers(): void
+    public function testShouldReturnsFirstResultReturnedByNestedRequestResolvers(): void
     {
         $request = $this->createMock(Request::class);
         $firstResolver = $this->createMock(RequestResolverInterface::class);
@@ -65,7 +65,6 @@ final class CompositeRequestResolverTest extends TestCase
 
         $firstResolver->expects(self::once())->method('findChannel')->with($request)->willReturn(null);
         $secondResolver->expects(self::once())->method('findChannel')->with($request)->willReturn($channel);
-        // $thirdResolver->findChannel should not be called
 
         $thirdResolver->expects(self::never())->method('findChannel');
 
@@ -84,7 +83,6 @@ final class CompositeRequestResolverTest extends TestCase
         $thirdResolver = $this->createMock(RequestResolverInterface::class);
         $channel = $this->createMock(ChannelInterface::class);
 
-        // Priority order: 0, 5, -5 → sorted as -5, 0, 5
         $firstResolver->expects(self::never())->method('findChannel');
         $secondResolver->expects(self::once())->method('findChannel')->with($request)->willReturn($channel);
         $thirdResolver->expects(self::once())->method('findChannel')->with($request)->willReturn(null);

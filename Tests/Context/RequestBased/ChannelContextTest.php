@@ -43,7 +43,7 @@ final class ChannelContextTest extends TestCase
         );
     }
 
-    public function testShouldImplementsChannelContextInterface(): void
+    public function testShouldImplementChannelContextInterface(): void
     {
         self::assertInstanceOf(ChannelContextInterface::class, $this->context);
     }
