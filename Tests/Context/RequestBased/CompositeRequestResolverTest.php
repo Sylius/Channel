@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Channel\Context\RequestBased\Tests;
+namespace Tests\Sylius\Component\Channel\Context\RequestBased;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver;
