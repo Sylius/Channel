@@ -34,11 +34,11 @@ class ChannelFactoryTest extends TestCase
         $defaultFactory = $this->createMock(FactoryInterface::class);
         $channel = $this->createMock(ChannelInterface::class);
 
-        $defaultFactory->expects($this->once())
+        $defaultFactory->expects(self::once())
             ->method('createNew')
             ->willReturn($channel);
 
-        $channel->expects($this->once())
+        $channel->expects(self::once())
             ->method('setName')
             ->with('United States Webstore');
 
@@ -52,7 +52,7 @@ class ChannelFactoryTest extends TestCase
         $defaultFactory = $this->createMock(FactoryInterface::class);
         $channel = $this->createMock(ChannelInterface::class);
 
-        $defaultFactory->expects($this->once())
+        $defaultFactory->expects(self::once())
             ->method('createNew')
             ->willReturn($channel);
 

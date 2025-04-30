@@ -36,7 +36,7 @@ final class ChannelDeletionCheckerTest extends TestCase
     public function testShouldReturnsTrueWhenChannelIsDisabled(): void
     {
         $channel = $this->createMock(ChannelInterface::class);
-        $channel->expects($this->once())
+        $channel->expects(self::once())
             ->method('isEnabled')
             ->willReturn(false);
 
@@ -48,10 +48,10 @@ final class ChannelDeletionCheckerTest extends TestCase
         $channel = $this->createMock(ChannelInterface::class);
         $anotherChannel = $this->createMock(ChannelInterface::class);
 
-        $channel->expects($this->once())
+        $channel->expects(self::once())
             ->method('isEnabled')
             ->willReturn(true);
-        $this->channelRepository->expects($this->once())
+        $this->channelRepository->expects(self::once())
             ->method('findEnabled')
             ->willReturn([$channel, $anotherChannel]);
 
@@ -62,10 +62,10 @@ final class ChannelDeletionCheckerTest extends TestCase
     {
         $channel = $this->createMock(ChannelInterface::class);
 
-        $channel->expects($this->once())
+        $channel->expects(self::once())
             ->method('isEnabled')
             ->willReturn(true);
-        $this->channelRepository->expects($this->once())
+        $this->channelRepository->expects(self::once())
             ->method('findEnabled')
             ->willReturn([$channel]);
 
@@ -76,10 +76,10 @@ final class ChannelDeletionCheckerTest extends TestCase
     {
         $channel = $this->createMock(ChannelInterface::class);
 
-        $channel->expects($this->once())
+        $channel->expects(self::once())
             ->method('isEnabled')
             ->willReturn(true);
-        $this->channelRepository->expects($this->once())
+        $this->channelRepository->expects(self::once())
             ->method('findEnabled')
             ->willReturn([]);
 
