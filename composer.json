@@ -56,7 +56,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Sylius\\Component\\Channel\\": "Tests/"
+            "Tests\\Sylius\\Component\\Channel\\": "tests/"
         }
     },
     "repositories": [
